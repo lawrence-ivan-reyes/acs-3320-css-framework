@@ -30,7 +30,7 @@ The framework uses CSS `@layer` for predictable cascade control:
 
 All values come from CSS custom properties. Key tokens include:
 
-- **Colors**: 5 color ramps (gray, primary, secondary, success, warning, danger) with 7 shades each
+- **Colours**: 5 color ramps (gray, primary, secondary, success, warning, danger) with 7 shades each
 - **Spacing**: `--space-xs` through `--space-2xl`
 - **Typography**: Modular scale using `--font-ratio: 1.25`
 - **Radii**: `--radius-sm`, `--radius-md`, `--radius-lg`, `--radius-full`
