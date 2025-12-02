@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ACSD Framework Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="acsd.css" />
+    <style>
+      .demo-section {
+        margin-block: var(--space-2xl);
+      }
+      .demo-grid {
+        display: grid;
+        gap: var(--space-md);
+      }
+      @media (min-width: 600px) {
+        .demo-grid--2 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .demo-grid--3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .color-swatch {
+        padding: var(--space-md);
+        border-radius: var(--radius-md);
+        font-size: var(--font-sm);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar">
+      <a href="#" class="navbar__brand">ACSD Framework</a>
+      <ul class="navbar__links">
+        <li>
+          <a href="#typography" class="navbar__link navbar__link--active"
+            >Typography</a
+          >
+        </li>
+        <li><a href="#components" class="navbar__link">Components</a></li>
+        <li><a href="#forms" class="navbar__link">Forms</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <h1>ACSD CSS Framework</h1>
+      <p>
+        A token-driven CSS framework with cascade layers.
+        <span class="badge badge--primary">v1.0</span>
+      </p>
+
+      <!-- typography -->
+      <section id="typography" class="demo-section">
+        <h2>Typography</h2>
+
+        <h1>Heading 1</h1>
+        <h2>Heading 2</h2>
+        <h3>Heading 3</h3>
+        <h4>Heading 4</h4>
+        <h5>Heading 5</h5>
+        <h6>Heading 6</h6>
+
+        <p>
+          This is a paragraph with <strong>bold text</strong>,
+          <em>italic text</em>, and <a href="#">a link</a>. The framework
+          provides sensible defaults for all semantic HTML elements.
+        </p>
+
+        <blockquote>
+          <p>
+            This is a blockquote. It uses the accent color for the left border
+            and has subtle styling.
+          </p>
+        </blockquote>
+
+        <p>Here is some <code>inline code</code> within text.</p>
+
+        <pre><code>// Code block example
+function greet(name) {
+  return `Hello, ${name}!`;
+}</code></pre>
+
+        <h3>Lists</h3>
+        <ul>
+          <li>Unordered list item one</li>
+          <li>Unordered list item two</li>
+          <li>Unordered list item three</li>
+        </ul>
+
+        <ol>
+          <li>Ordered list item one</li>
+          <li>Ordered list item two</li>
+          <li>Ordered list item three</li>
+        </ol>
+
+        <dl>
+          <dt>Definition Term</dt>
+          <dd>This is the definition for the term above.</dd>
+          <dt>Another Term</dt>
+          <dd>Another definition goes here.</dd>
+        </dl>
+      </section>
+
+      <!-- tables -->
+      <section class="demo-section">
+        <h2>Tables</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Alice</td>
+              <td>Developer</td>
+              <td><span class="badge badge--success">Active</span></td>
+            </tr>
+            <tr>
+              <td>Bob</td>
+              <td>Designer</td>
+              <td><span class="badge badge--primary">Active</span></td>
+            </tr>
+            <tr>
+              <td>Carol</td>
+              <td>Manager</td>
+              <td><span class="badge badge--danger">Away</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- components -->
+      <section id="components" class="demo-section">
+        <h2>Components</h2>
+
+        <h3>Buttons</h3>
+        <div class="flex gap-sm" style="flex-wrap: wrap">
+          <button class="btn">Primary</button>
+          <button class="btn btn--secondary">Secondary</button>
+          <button class="btn btn--danger">Danger</button>
+          <button class="btn btn--outline">Outline</button>
+          <button class="btn btn--sm">Small</button>
+          <button class="btn btn--lg">Large</button>
+          <button class="btn" disabled>Disabled</button>
+        </div>
+
+        <h3 class="mt-lg">Cards</h3>
+        <div class="demo-grid demo-grid--2">
+          <article class="card">
+            <header class="card__header">Card Header</header>
+            <div class="card__body">
+              <p>
+                This is the card body content. Cards use token-driven spacing
+                and borders.
+              </p>
+            </div>
+            <footer class="card__footer">
+              <button class="btn btn--sm">Action</button>
+            </footer>
+          </article>
+
+          <article class="card card--elevated">
+            <div class="card__body">
+              <h4>Elevated Card</h4>
+              <p>
+                This card uses a shadow instead of a border for a floating
+                effect.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <h3 class="mt-lg">Alerts</h3>
+        <div class="alert">
+          <div>
+            <div class="alert__title">Info Alert</div>
+            <p>This is an informational message.</p>
+          </div>
+        </div>
+        <div class="alert alert--success mt-md">
+          <div>
+            <div class="alert__title">Success!</div>
+            <p>Your changes have been saved.</p>
+          </div>
+        </div>
+        <div class="alert alert--warning mt-md">
+          <div>
+            <div class="alert__title">Warning</div>
+            <p>Please review before continuing.</p>
+          </div>
+        </div>
+        <div class="alert alert--danger mt-md">
+          <div>
+            <div class="alert__title">Error</div>
+            <p>Something went wrong. Please try again.</p>
+          </div>
+        </div>
+
+        <h3 class="mt-lg">Badges</h3>
+        <p>
+          <span class="badge">Default</span>
+          <span class="badge badge--primary">Primary</span>
+          <span class="badge badge--success">Success</span>
+          <span class="badge badge--danger">Danger</span>
+        </p>
+
+        <h3 class="mt-lg">Progress Bars</h3>
+        <div class="progress mb-md">
+          <div class="progress__bar" style="width: 60%"></div>
+        </div>
+        <div class="progress progress--success mb-md">
+          <div class="progress__bar" style="width: 100%"></div>
+        </div>
+        <div class="progress progress--warning">
+          <div class="progress__bar" style="width: 30%"></div>
+        </div>
+      </section>
+
+      <!-- forms -->
+      <section id="forms" class="demo-section">
+        <h2>Forms</h2>
+        <form>
+          <fieldset>
+            <legend>Contact Information</legend>
+
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Enter your name" />
+
+            <label for="email" class="mt-md">Email</label>
+            <input type="email" id="email" placeholder="you@example.com" />
+
+            <label for="message" class="mt-md">Message</label>
+            <textarea id="message" placeholder="Your message..."></textarea>
+
+            <label for="category" class="mt-md">Category</label>
+            <select id="category">
+              <option>General Inquiry</option>
+              <option>Support</option>
+              <option>Feedback</option>
+            </select>
+
+            <div class="mt-lg">
+              <button type="submit" class="btn">Submit</button>
+              <button type="reset" class="btn btn--outline">Reset</button>
+            </div>
+          </fieldset>
+        </form>
+      </section>
+
+      <!-- media -->
+      <section class="demo-section">
+        <h2>Media</h2>
+        <figure>
+          <img
+            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=400&fit=crop"
+            alt="Code on a screen"
+          />
+          <figcaption>Figure caption: A developer's workspace</figcaption>
+        </figure>
+      </section>
+
+      <!-- theme toggle -->
+      <section class="demo-section">
+        <h2>Theme Toggle</h2>
+        <p>Click the button below to toggle dark mode:</p>
+        <button
+          class="btn"
+          onclick="document.body.classList.toggle('theme-dark')"
+        >
+          Toggle Dark Mode
+        </button>
+      </section>
+
+      <hr />
+      <footer class="text-center text-muted">
+        <p>CSS Framework &copy; 2025</p>
+      </footer>
+    </main>
+  </body>
+</html>
