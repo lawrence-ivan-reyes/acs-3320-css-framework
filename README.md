@@ -1,16 +1,14 @@
-# ACSD CSS Framework
+CSS Framework
 
 A token-driven CSS framework built with modern cascade layers. ACSD provides sensible defaults for semantic HTML and reusable components—perfect for marketing pages, documentation, and internal tools.
 
 ## Quick Start
 
-Add the framework to your HTML:
+Add the framework to any HTML:
 
 ```html
 <link rel="stylesheet" href="acsd.css" />
 ```
-
-That's it! Your semantic HTML will automatically look polished. No classes required for basic elements.
 
 ## Layer Architecture
 
@@ -101,19 +99,19 @@ All values come from CSS custom properties. Key tokens include:
 ## Utilities
 
 ```css
-/* Display */
+/* display */
 .flex, .grid, .block, .hidden
 
-/* Flexbox */
+/* flexbox */
 .items-center, .justify-between, .gap-sm, .gap-md
 
-/* Spacing */
+/* spacing */
 .mt-sm, .mt-md, .mt-lg, .mb-md, .p-md
 
-/* Text */
+/* text */
 .text-center, .text-muted, .text-sm, .font-bold
 
-/* Layout */
+/* layout */
 .container;
 ```
 
@@ -129,5 +127,3 @@ Requires a modern browser with support for:
 - CSS Cascade Layers (`@layer`)
 - OKLCH color space
 - Relative color syntax (`oklch(from ...)`)
-
-Tested in Chrome 111+, Safari 16.4+, Firefox 113+.
