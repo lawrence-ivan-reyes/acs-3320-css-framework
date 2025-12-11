@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Components Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="acsd.css" />
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+      ::view-transition-old(root) {
+        animation: fade-out 200ms ease-out;
+      }
+      ::view-transition-new(root) {
+        animation: fade-in 300ms ease-in;
+      }
+      @keyframes fade-out {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      h1 {
+        view-transition-name: page-title;
+      }
+      .navbar {
+        view-transition-name: navbar;
+      }
+
+      /* demo layout */
+      .demo-section {
+        margin-block: var(--space-2xl);
+      }
+      .demo-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-md);
+        align-items: center;
+      }
+      .toggle-demo-output {
+        padding: var(--space-sm) var(--space-md);
+        background: var(--color-surface);
+        border-radius: var(--radius-md);
+        font-size: var(--font-sm);
+        border: 1px solid var(--color-border);
+      }
+
+      /* ::part() styling examples */
+      .custom-avatar::part(image) {
+        border: 3px solid var(--color-secondary-4);
+      }
+      .custom-avatar::part(container) {
+        filter: drop-shadow(0 4px 12px oklch(0.5 0.2 280 / 0.3));
+      }
+
+      .neon-toggle::part(track) {
+        background: oklch(0.2 0.02 270);
+      }
+      .neon-toggle[checked]::part(track) {
+        background: linear-gradient(135deg, #00ff88, #00ccff);
+        box-shadow: 0 0 20px #00ff88;
+      }
+      .neon-toggle::part(label) {
+        font-family: var(--font-mono);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="#" class="navbar__brand">CSS Framework</a>
+      <ul class="navbar__links">
+        <li><a href="demo.html" class="navbar__link">CSS Framework</a></li>
+        <li>
+          <a
+            href="components-demo.html"
+            class="navbar__link navbar__link--active"
+            >Web Components</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <main>
+      <h1>Web Components</h1>
+      <p>
+        Custom elements built with the CSS framework.
+        <span class="badge badge--primary">3 Components</span>
+      </p>
+
+      <!-- avatar -->
+      <section class="demo-section">
+        <h2>1. Avatar Component</h2>
+        <p class="text-muted">
+          User avatars with auto-initials, status indicators, and size variants.
+        </p>
+
+        <h3 class="mt-lg">Sizes & Status</h3>
+        <div class="demo-row">
+          <acsd-avatar name="Small" size="sm"></acsd-avatar>
+          <acsd-avatar name="Medium" size="md"></acsd-avatar>
+          <acsd-avatar
+            name="Large Size"
+            size="lg"
+            status="online"
+          ></acsd-avatar>
+          <acsd-avatar
+            name="Extra Large"
+            size="xl"
+            status="busy"
+            ring
+          ></acsd-avatar>
+        </div>
+
+        <h3 class="mt-lg">Avatar Stack</h3>
+        <div class="demo-row" style="margin-left: 8px">
+          <div style="display: flex; margin-left: -8px">
+            <acsd-avatar
+              name="Emma Wilson"
+              style="margin-left: -8px; position: relative; z-index: 4"
+            ></acsd-avatar>
+            <acsd-avatar
+              name="Frank Lee"
+              style="margin-left: -8px; position: relative; z-index: 3"
+            ></acsd-avatar>
+            <acsd-avatar
+              name="Grace Kim"
+              style="margin-left: -8px; position: relative; z-index: 2"
+            ></acsd-avatar>
+            <acsd-avatar
+              name="Henry Chen"
+              style="margin-left: -8px; position: relative; z-index: 1"
+            ></acsd-avatar>
+          </div>
+          <span class="text-muted text-sm">+4 more team members</span>
+        </div>
+
+        <h3 class="mt-lg">Slot Fallback</h3>
+        <p class="text-muted text-sm">
+          Custom fallback content via <code>&lt;slot name="fallback"&gt;</code>:
+        </p>
+        <div class="demo-row">
+          <acsd-avatar size="lg"
+            ><span slot="fallback" style="font-size: 1.5rem"
+              >👤</span
+            ></acsd-avatar
+          >
+          <acsd-avatar size="lg"
+            ><span slot="fallback" style="font-size: 1.5rem"
+              >🤖</span
+            ></acsd-avatar
+          >
+        </div>
+
+        <h3 class="mt-lg">::part() Styling</h3>
+        <div class="demo-row">
+          <acsd-avatar
+            class="custom-avatar"
+            name="Styled"
+            size="lg"
+            status="online"
+          ></acsd-avatar>
+        </div>
+        <pre><code>.custom-avatar::part(image) { border: 3px solid var(--color-secondary-4); }</code></pre>
+      </section>
+
+      <!-- toggle -->
+      <section class="demo-section">
+        <h2>2. Toggle Component</h2>
+        <p class="text-muted">
+          Accessible toggle switch with keyboard support and custom events.
+        </p>
+
+        <h3 class="mt-lg">Examples</h3>
+        <div class="demo-row">
+          <acsd-toggle label="Enable notifications"></acsd-toggle>
+          <acsd-toggle label="Dark mode" id="darkModeToggle"></acsd-toggle>
+          <acsd-toggle label="Disabled" disabled></acsd-toggle>
+        </div>
+
+        <h3 class="mt-lg">Slot Content</h3>
+        <div class="demo-row">
+          <acsd-toggle
+            ><span
+              >Enable
+              <strong style="color: var(--color-accent)">Premium</strong>
+              features</span
+            ></acsd-toggle
+          >
+        </div>
+
+        <h3 class="mt-lg">::part() Styling</h3>
+        <div class="demo-row">
+          <acsd-toggle
+            class="neon-toggle"
+            label="SYSTEM ONLINE"
+            id="neonToggle"
+          ></acsd-toggle>
+        </div>
+
+        <h3 class="mt-lg">Event Handling</h3>
+        <div class="demo-row">
+          <acsd-toggle label="Toggle me" id="eventToggle"></acsd-toggle>
+          <div class="toggle-demo-output" id="toggleOutput">State: off</div>
+        </div>
+      </section>
+
+      <!-- toast -->
+      <section class="demo-section">
+        <h2>3. Toast Component</h2>
+        <p class="text-muted">
+          Notification manager with animations, auto-dismiss, and variants.
+        </p>
+
+        <h3 class="mt-lg">Try It</h3>
+        <div class="demo-row">
+          <button class="btn" onclick="showToast('default')">Default</button>
+          <button class="btn btn--secondary" onclick="showToast('info')">
+            Info
+          </button>
+          <button
+            class="btn"
+            style="--btn-bg: var(--color-success-4)"
+            onclick="showToast('success')"
+          >
+            Success
+          </button>
+          <button
+            class="btn"
+            style="--btn-bg: var(--color-warning-3)"
+            onclick="showToast('warning')"
+          >
+            Warning
+          </button>
+          <button class="btn btn--danger" onclick="showToast('danger')">
+            Danger
+          </button>
+          <button
+            class="btn btn--outline"
+            onclick="document.querySelector('acsd-toast').clear()"
+          >
+            Clear All
+          </button>
+        </div>
+      </section>
+
+      <!-- write-up section -->
+      <section class="demo-section">
+        <h2>Component Documentation</h2>
+
+        <article class="card mt-md">
+          <header class="card__header">acsd-avatar</header>
+          <div class="card__body">
+            <p>
+              <strong>Problem Solved:</strong> Provides a polished way to
+              display user identities with automatic initials generation, status
+              indicators, and consistent sizing across the app.
+            </p>
+            <p>
+              <strong>Design System Integration:</strong> Uses
+              <code>--radius-full</code> for circular shape,
+              <code>--shadow-sm</code> for depth,
+              <code>--color-accent</code> for ring highlights, and semantic
+              status colors. Name-based color generation ensures visual variety.
+            </p>
+            <p>
+              <strong>Future Improvements:</strong> Add image lazy loading,
+              fallback error handling, and group component for overlapping
+              stacks.
+            </p>
+          </div>
+        </article>
+
+        <article class="card mt-md">
+          <header class="card__header">acsd-toggle</header>
+          <div class="card__body">
+            <p>
+              <strong>Problem Solved:</strong> Replaces checkbox inputs with a
+              modern, accessible toggle switch that fits the design system
+              aesthetic.
+            </p>
+            <p>
+              <strong>Design System Integration:</strong> Uses
+              <code>--color-accent</code> gradient for active state,
+              <code>--radius-full</code> for pill shape, and
+              <code>--shadow-sm</code> for the thumb. Transitions use framework
+              timing functions.
+            </p>
+            <p>
+              <strong>Future Improvements:</strong> Add size variants, form
+              association, and custom icons for on/off states.
+            </p>
+          </div>
+        </article>
+
+        <article class="card mt-md">
+          <header class="card__header">acsd-toast</header>
+          <div class="card__body">
+            <p>
+              <strong>Problem Solved:</strong> Provides non-blocking feedback
+              notifications without requiring external libraries. Manages
+              multiple toasts with proper stacking.
+            </p>
+            <p>
+              <strong>Design System Integration:</strong> Uses semantic color
+              tokens for variants, <code>--shadow-lg</code> for elevation, and
+              <code>--radius-lg</code> for rounded corners. Animations match the
+              framework's easing curves.
+            </p>
+            <p>
+              <strong>Future Improvements:</strong> Add progress indicator,
+              action buttons, and promise-based API for async operations.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <hr />
+      <footer class="text-center text-muted">
+        <p>ACSD Web Components © 2025</p>
+      </footer>
+    </main>
+
+    <acsd-toast position="bottom-right" duration="4000"></acsd-toast>
+
+    <script src="components/acsd-avatar.js"></script>
+    <script src="components/acsd-toggle.js"></script>
+    <script src="components/acsd-toast.js"></script>
+
+    <script>
+      document
+        .getElementById('darkModeToggle')
+        .addEventListener('acsd-toggle-change', (e) => {
+          document.body.classList.toggle('theme-dark', e.detail.checked);
+        });
+
+      document
+        .getElementById('eventToggle')
+        .addEventListener('acsd-toggle-change', (e) => {
+          document.getElementById('toggleOutput').textContent = `State: ${
+            e.detail.checked ? 'on' : 'off'
+          }`;
+        });
+
+      const messages = {
+        default: 'This is a default notification',
+        info: "Here's some helpful information",
+        success: 'Operation completed successfully!',
+        warning: 'Please review before continuing',
+        danger: 'Something went wrong. Please try again.',
+      };
+      function showToast(v) {
+        document.querySelector('acsd-toast').show(messages[v], v);
+      }
+    </script>
+  </body>
+</html>
